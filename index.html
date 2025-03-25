@@ -236,13 +236,20 @@
     D --> E[Open Study Materials Tab]
     E --> F[Download Question & Answer PDFs]
     F --> G[Attach PDFs to Grok Conversation]
-    G --> H[Watch Topic Video]
+    G --> H["Watch Topic Video
+    (Look for (+) for videos with backups)"]
     
-    H --> I{Confused about\\nsomething?}
+    H --> AP{AP Classroom\\nAvailable?}
+    AP -->|Yes| WA[Watch AP Classroom Video]
+    AP -->|No| WG["Use Google Drive Backup Video
+    (Hover over (+) for the link)"]
+    WA --> I{Confused about\\nsomething?}
+    WG --> I
+    
     I -->|Yes| J[Pause Video]
     J --> K[Ask Grok for Help]
     K --> L[Return to Video]
-    L --> H
+    L --> I
     
     I -->|No| M[Finish Video]
     M --> N[Work Through Practice Problems with Grok]
@@ -262,7 +269,7 @@
     
     class A,B,C,D blueBox;
     class E,F,G blueBox;
-    class H,I,J,K,L yellowBox;
+    class H,AP,WA,WG,I,J,K,L yellowBox;
     class M,N,O greenBox;
     class P,Q,R purpleBox;
     class S redBox;`;
