@@ -76,9 +76,12 @@
             </div>
             
             <!-- Grok Prompt Tab -->
-            <div class="tab-content p-6" id="content-grok-prompt">
+            <div id="content-grok-prompt" class="tab-content p-6">
                 <h2 class="text-2xl font-bold mb-4 text-center text-indigo-900">Start Your Grok Session</h2>
-                
+                <div class="text-xs text-gray-600 mb-4">
+                    <span class="bg-green-100 text-green-800 px-1 rounded mr-1">(+)</span> 
+                    Videos marked with this symbol have a Google Drive backup available if AP Classroom is down. Hover over the icon for details.
+                </div>
                 <div class="grid md:grid-cols-2 gap-6">
                     <!-- Left Column: Prompt and Instructions -->
                     <div class="bg-white rounded-lg shadow-md p-5">
@@ -170,10 +173,15 @@
             
             <!-- Study Materials Tab -->
             <div id="content-study-materials" class="tab-content">
-                <h2 class="text-xl font-bold mb-4">AP Statistics Study Materials</h2>
-                <p class="mb-4">Select a topic to study. Download both PDFs and attach them to your Grok conversation.</p>
+                <h2 class="text-2xl font-bold mb-4 text-center text-indigo-900">AP Statistics Study Materials</h2>
+                <p class="text-center mb-4">Select a topic to study. Download both PDFs and attach them to your Grok conversation.</p>
                 
-                <!-- New call-to-action for Grok Prompt tab -->
+                <div class="text-xs text-gray-600 mb-4 text-center">
+                  <span class="bg-green-100 text-green-800 px-1 rounded mr-1">(+)</span> 
+                  Videos marked with this symbol have a Google Drive backup available if AP Classroom is down. Hover over the icon for details.
+                </div>
+
+                <!-- Grok Prompt CTA Banner -->
                 <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg flex items-center justify-between">
                     <div>
                         <h3 class="font-bold text-blue-800 mb-1">Try our improved Grok Prompt tab!</h3>
@@ -539,46 +547,76 @@ Thank you for helping me prepare for my AP Statistics exam!`;
                     </div>
                     ` : ''}
                     ${topic.videoUrl ? `
-                    <a href="${topic.videoUrl}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800">
+                    <a href="${topic.videoUrl}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800 group relative">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
                         </svg>
-                        Watch Topic Video ${topic.videoUrl2 || topic.videoUrl3 ? '1' : ''} (AP Classroom)
+                        Watch Topic Video ${topic.videoUrl2 || topic.videoUrl3 ? ' 1' : ''}
+                        ${topic.altVideoUrl ? `
+                        <span class="ml-1 text-xs bg-green-100 text-green-800 px-1 rounded">
+                            <svg class="w-3 h-3 inline-block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                        <span class="absolute left-0 bottom-full mb-2 hidden group-hover:block bg-white border border-gray-200 rounded p-2 shadow-md text-xs text-gray-700 w-48 z-50">
+                            If AP Classroom is down, <a href="${topic.altVideoUrl}" class="text-blue-600 hover:text-blue-800">click here</a> for the backup Google Drive video.
+                        </span>
+                        ` : ''}
                     </a>
                     ` : ''}
-                    ${topic.altVideoUrl ? `
+                    ${!topic.videoUrl && topic.altVideoUrl ? `
                     <a href="${topic.altVideoUrl}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
                         </svg>
-                        Watch Topic Video ${topic.altVideoUrl2 || topic.altVideoUrl3 ? '1' : ''} (Google Drive)
+                        Watch Topic Video ${topic.altVideoUrl2 || topic.altVideoUrl3 ? ' 1' : ''} (Google Drive)
                     </a>
                     ` : ''}
                     ${topic.videoUrl2 ? `
-                    <a href="${topic.videoUrl2}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800">
+                    <a href="${topic.videoUrl2}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800 group relative">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
                         </svg>
-                        Watch Topic Video 2 (AP Classroom)
+                        Watch Topic Video 2
+                        ${topic.altVideoUrl2 ? `
+                        <span class="ml-1 text-xs bg-green-100 text-green-800 px-1 rounded">
+                            <svg class="w-3 h-3 inline-block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                        <span class="absolute left-0 bottom-full mb-2 hidden group-hover:block bg-white border border-gray-200 rounded p-2 shadow-md text-xs text-gray-700 w-48 z-50">
+                            If AP Classroom is down, <a href="${topic.altVideoUrl2}" class="text-blue-600 hover:text-blue-800">click here</a> for the backup Google Drive video.
+                        </span>
+                        ` : ''}
                     </a>
                     ` : ''}
-                    ${topic.altVideoUrl2 ? `
-                    <a href="${topic.altVideoUrl2}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800">
-                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    ${!topic.videoUrl2 && topic.altVideoUrl2 ? `
+                    <a href="${topic.altVideoUrl2}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800 bg-white p-2 rounded border border-yellow-200 hover:bg-yellow-50">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
                         </svg>
                         Watch Topic Video 2 (Google Drive)
                     </a>
                     ` : ''}
                     ${topic.videoUrl3 ? `
-                    <a href="${topic.videoUrl3}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800">
+                    <a href="${topic.videoUrl3}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800 group relative">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
                         </svg>
-                        Watch Topic Video 3 (AP Classroom)
+                        Watch Topic Video 3
+                        ${topic.altVideoUrl3 ? `
+                        <span class="ml-1 text-xs bg-green-100 text-green-800 px-1 rounded">
+                            <svg class="w-3 h-3 inline-block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                        <span class="absolute left-0 bottom-full mb-2 hidden group-hover:block bg-white border border-gray-200 rounded p-2 shadow-md text-xs text-gray-700 w-48 z-50">
+                            If AP Classroom is down, <a href="${topic.altVideoUrl3}" class="text-blue-600 hover:text-blue-800">click here</a> for the backup Google Drive video.
+                        </span>
+                        ` : ''}
                     </a>
                     ` : ''}
-                    ${topic.altVideoUrl3 ? `
+                    ${!topic.videoUrl3 && topic.altVideoUrl3 ? `
                     <a href="${topic.altVideoUrl3}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
@@ -586,6 +624,7 @@ Thank you for helping me prepare for my AP Statistics exam!`;
                         Watch Topic Video 3 (Google Drive)
                     </a>
                     ` : ''}
+                    
                     ${isNextTopic || topic.current ? `
                     <div class="mt-2 p-2 bg-blue-100 text-blue-800 text-sm rounded flex items-center">
                         <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -1214,7 +1253,7 @@ Thank you for helping me prepare for my AP Statistics exam!`;
                         </a>
                         ` : ''}
                         ${!currentTopic.questionPdf && !currentTopic.answersPdf ? `
-                        <div class="p-2 bg-blue-50 rounded text-blue-700 mb-2">
+                        <div class="p-2 bg-blue-50 rounded text-blue-700 text-sm mb-2">
                             <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                             </svg>
@@ -1222,30 +1261,50 @@ Thank you for helping me prepare for my AP Statistics exam!`;
                         </div>
                         ` : ''}
                         ${currentTopic.videoUrl ? `
-                        <a href="${currentTopic.videoUrl}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800 bg-white p-2 rounded border border-yellow-200 hover:bg-yellow-50">
+                        <a href="${currentTopic.videoUrl}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800 bg-white p-2 rounded border border-yellow-200 hover:bg-yellow-50 group relative">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
                             </svg>
-                            Watch Topic Video ${currentTopic.videoUrl2 || currentTopic.videoUrl3 ? '1' : ''} (AP Classroom)
+                            Watch Topic Video ${currentTopic.videoUrl2 || currentTopic.videoUrl3 ? ' 1' : ''}
+                            ${currentTopic.altVideoUrl ? `
+                            <span class="ml-1 text-xs bg-green-100 text-green-800 px-1 rounded flex-shrink-0">
+                                <svg class="w-3 h-3 inline-block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                </svg>
+                            </span>
+                            <span class="absolute top-full left-0 mt-1 hidden group-hover:block bg-white border border-gray-200 rounded p-2 shadow-md text-xs text-gray-700 w-48 z-50">
+                                If AP Classroom is down, <a href="${currentTopic.altVideoUrl}" class="text-blue-600 hover:text-blue-800">click here</a> for the backup Google Drive video.
+                            </span>
+                            ` : ''}
                         </a>
                         ` : ''}
-                        ${currentTopic.altVideoUrl ? `
+                        ${!currentTopic.videoUrl && currentTopic.altVideoUrl ? `
                         <a href="${currentTopic.altVideoUrl}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800 bg-white p-2 rounded border border-yellow-200 hover:bg-yellow-50">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
                             </svg>
-                            Watch Topic Video ${currentTopic.altVideoUrl2 || currentTopic.altVideoUrl3 ? '1' : ''} (Google Drive)
+                            Watch Topic Video ${currentTopic.altVideoUrl2 || currentTopic.altVideoUrl3 ? ' 1' : ''} (Google Drive)
                         </a>
                         ` : ''}
                         ${currentTopic.videoUrl2 ? `
-                        <a href="${currentTopic.videoUrl2}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800 bg-white p-2 rounded border border-yellow-200 hover:bg-yellow-50">
+                        <a href="${currentTopic.videoUrl2}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800 bg-white p-2 rounded border border-yellow-200 hover:bg-yellow-50 group relative">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
                             </svg>
-                            Watch Topic Video 2 (AP Classroom)
+                            Watch Topic Video 2
+                            ${currentTopic.altVideoUrl2 ? `
+                            <span class="ml-1 text-xs bg-green-100 text-green-800 px-1 rounded flex-shrink-0">
+                                <svg class="w-3 h-3 inline-block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                </svg>
+                            </span>
+                            <span class="absolute top-full left-0 mt-1 hidden group-hover:block bg-white border border-gray-200 rounded p-2 shadow-md text-xs text-gray-700 w-48 z-50">
+                                If AP Classroom is down, <a href="${currentTopic.altVideoUrl2}" class="text-blue-600 hover:text-blue-800">click here</a> for the backup Google Drive video.
+                            </span>
+                            ` : ''}
                         </a>
                         ` : ''}
-                        ${currentTopic.altVideoUrl2 ? `
+                        ${!currentTopic.videoUrl2 && currentTopic.altVideoUrl2 ? `
                         <a href="${currentTopic.altVideoUrl2}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800 bg-white p-2 rounded border border-yellow-200 hover:bg-yellow-50">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
@@ -1254,14 +1313,24 @@ Thank you for helping me prepare for my AP Statistics exam!`;
                         </a>
                         ` : ''}
                         ${currentTopic.videoUrl3 ? `
-                        <a href="${currentTopic.videoUrl3}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800 bg-white p-2 rounded border border-yellow-200 hover:bg-yellow-50">
+                        <a href="${currentTopic.videoUrl3}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800 bg-white p-2 rounded border border-yellow-200 hover:bg-yellow-50 group relative">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
                             </svg>
-                            Watch Topic Video 3 (AP Classroom)
+                            Watch Topic Video 3
+                            ${currentTopic.altVideoUrl3 ? `
+                            <span class="ml-1 text-xs bg-green-100 text-green-800 px-1 rounded flex-shrink-0">
+                                <svg class="w-3 h-3 inline-block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                </svg>
+                            </span>
+                            <span class="absolute top-full left-0 mt-1 hidden group-hover:block bg-white border border-gray-200 rounded p-2 shadow-md text-xs text-gray-700 w-48 z-50">
+                                If AP Classroom is down, <a href="${currentTopic.altVideoUrl3}" class="text-blue-600 hover:text-blue-800">click here</a> for the backup Google Drive video.
+                            </span>
+                            ` : ''}
                         </a>
                         ` : ''}
-                        ${currentTopic.altVideoUrl3 ? `
+                        ${!currentTopic.videoUrl3 && currentTopic.altVideoUrl3 ? `
                         <a href="${currentTopic.altVideoUrl3}" target="_blank" class="flex items-center text-yellow-600 hover:text-yellow-800 bg-white p-2 rounded border border-yellow-200 hover:bg-yellow-50">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
@@ -1419,12 +1488,12 @@ Thank you for helping me prepare for my AP Statistics exam!`;
                         ${topic.questionPdf2 ? `<a href="${topic.questionPdf2}" target="_blank" download class="text-blue-600 hover:text-blue-800">MCQ Part A</a>` : ''}
                         ${topic.questionPdf3 ? `<a href="${topic.questionPdf3}" target="_blank" download class="text-blue-600 hover:text-blue-800">MCQ Part B</a>` : ''}
                         ${!topic.questionPdf && !topic.answersPdf && !topic.questionPdf2 && !topic.questionPdf3 ? `<span class="text-blue-500 italic">Video content only</span>` : ''}
-                        ${topic.videoUrl ? `<a href="${topic.videoUrl}" target="_blank" class="text-yellow-600 hover:text-yellow-800">Video${topic.videoUrl2 || topic.videoUrl3 ? ' 1' : ''} (AP)</a>` : ''}
-                        ${topic.altVideoUrl ? `<a href="${topic.altVideoUrl}" target="_blank" class="text-yellow-600 hover:text-yellow-800">Video${topic.altVideoUrl2 || topic.altVideoUrl3 ? ' 1' : ''} (GD)</a>` : ''}
-                        ${topic.videoUrl2 ? `<a href="${topic.videoUrl2}" target="_blank" class="text-yellow-600 hover:text-yellow-800">Video 2 (AP)</a>` : ''}
-                        ${topic.altVideoUrl2 ? `<a href="${topic.altVideoUrl2}" target="_blank" class="text-yellow-600 hover:text-yellow-800">Video 2 (GD)</a>` : ''}
-                        ${topic.videoUrl3 ? `<a href="${topic.videoUrl3}" target="_blank" class="text-yellow-600 hover:text-yellow-800">Video 3 (AP)</a>` : ''}
-                        ${topic.altVideoUrl3 ? `<a href="${topic.altVideoUrl3}" target="_blank" class="text-yellow-600 hover:text-yellow-800">Video 3 (GD)</a>` : ''}
+                        ${topic.videoUrl ? `<a href="${topic.videoUrl}" target="_blank" class="text-yellow-600 hover:text-yellow-800">Video${topic.videoUrl2 || topic.videoUrl3 ? ' 1' : ''} ${topic.altVideoUrl ? '(+)' : ''}</a>` : ''}
+                        ${!topic.videoUrl && topic.altVideoUrl ? `<a href="${topic.altVideoUrl}" target="_blank" class="text-yellow-600 hover:text-yellow-800">Video${topic.altVideoUrl2 || topic.altVideoUrl3 ? ' 1' : ''}</a>` : ''}
+                        ${topic.videoUrl2 ? `<a href="${topic.videoUrl2}" target="_blank" class="text-yellow-600 hover:text-yellow-800">Video 2 ${topic.altVideoUrl2 ? '(+)' : ''}</a>` : ''}
+                        ${!topic.videoUrl2 && topic.altVideoUrl2 ? `<a href="${topic.altVideoUrl2}" target="_blank" class="text-yellow-600 hover:text-yellow-800">Video 2</a>` : ''}
+                        ${topic.videoUrl3 ? `<a href="${topic.videoUrl3}" target="_blank" class="text-yellow-600 hover:text-yellow-800">Video 3 ${topic.altVideoUrl3 ? '(+)' : ''}</a>` : ''}
+                        ${!topic.videoUrl3 && topic.altVideoUrl3 ? `<a href="${topic.altVideoUrl3}" target="_blank" class="text-yellow-600 hover:text-yellow-800">Video 3</a>` : ''}
                     </div>
                 `;
                 
